@@ -6,14 +6,14 @@
 </head>
 <body>
 <div>
-    <form action="post">
+    <form method="post">
         <input type="text" name="text" placeholder="Введите сообщение">
         <input type="text" name="tag" placeholder="Тэг">
         <button type="submit"> Добавить </button>
     </form>
 </div>
 <div>Список сообщений:</div>
-    {{#message}}
+    {{#messages}}
 <div>
     <b>{{id}}</b>
     <span>{{text}}</span>
