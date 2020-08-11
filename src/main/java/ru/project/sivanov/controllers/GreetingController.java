@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.project.sivanov.models.Message;
 import ru.project.sivanov.repository.MessageRepo;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -43,6 +44,24 @@ public class GreetingController {
         Iterable<Message> messages = messageRepo.findAll();
         model.put("messages", messages);
 
+        return "main";
+    }
+
+    @PostMapping("filter")
+    public String filter(@RequestParam String filter, Map<String, Object> model){
+        Iterable<Message> messages;
+        if(filter != null && filter.isEmpty()){
+            messages = messageRepo.findByTag(filter);
+            model.put("messages", messages);
+        }else{
+            messages = messageRepo.findAll();
+        }
+        return "main";
+    }
+
+    @PostMapping("clear")
+    public String clear(Map<String, Object> model){
+        messageRepo.deleteAll();
         return "main";
     }
 }
